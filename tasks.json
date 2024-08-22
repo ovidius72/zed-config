@@ -1,0 +1,82 @@
+// Static tasks configuration.
+[
+  {
+    "label": "LazyGit",
+    "command": "lazygit",
+    // rest of the parameters are optional
+    // "args": ["-c", "for i in {1..5}; do echo \"Hello $i/5\"; sleep 1; done"],
+    // Env overrides for the command, will be appended to the terminal's environment from the settings.
+    // "env": { "foo": "bar" },
+    // Current working directory to spawn the command into, defaults to current project root.
+    //"cwd": "/path/to/working/directory",
+    // Whether to use a new terminal tab or reuse the existing one to spawn the process, defaults to `false`.
+    "use_new_terminal": true,
+    // "target": {
+    //   "terminal_panel": {
+    //     "dispaly": "zoom"
+    //   }
+    // },
+    // Whether to allow multiple instances of the same task to be run, or rather wait for the existing ones to finish, defaults to `false`.
+    "allow_concurrent_runs": false,
+    "reveal": "always",
+    "hide": "always"
+  },
+  {
+    "label": "FZFGitChanged",
+    "command": "zed $(git diff --name-only --diff-filter=d origin/master | fzf --multi --height=100% --border=double --info=inline --prompt='$>' --pointer='→' --marker='♡' --preview='bat --color=always --style=header,grid,numbers --line-range :500 {}' --header='CTRL-c or ESC to quit' --color='dark,fg:magenta')",
+    // rest of the parameters are optional
+    // "args": ["-c", "for i in {1..5}; do echo \"Hello $i/5\"; sleep 1; done"],
+    // Env overrides for the command, will be appended to the terminal's environment from the settings.
+    // "env": { "foo": "bar" },
+    // Current working directory to spawn the command into, defaults to current project root.
+    //"cwd": "/path/to/working/directory",
+    // Whether to use a new terminal tab or reuse the existing one to spawn the process, defaults to `false`.
+    "use_new_terminal": false,
+    // "target": {
+    //   "terminal_panel": {
+    //     "dispaly": "zoom"
+    //   }
+    // },
+    // Whether to allow multiple instances of the same task to be run, or rather wait for the existing ones to finish, defaults to `false`.
+    "allow_concurrent_runs": false,
+    "reveal": "always",
+    "hide": "always"
+  },
+  {
+    "label": "FZFContent",
+    "command": "rg --color=always --line-number --no-heading --smart-case \"${*:-}\" | fzf --ansi --color \"hl:-1:underline,hl+:-1:underline:reverse\" --delimiter : --preview 'bat --color=always {1} --highlight-line {2}' --preview-window 'up,60%,border-bottom,+{2}+3/3,~3'  --bind 'enter:become(zed {1} +{2})'",
+    // rest of the parameters are optional
+    // "args": ["-c", "for i in {1..5}; do echo "Hello $i/5\"; sleep 1; done"],
+    // Env overrides for the command, will be appended to the terminal's environment from the settings.
+    // "env": { "foo": "bar" },
+    // Current working directory to spawn the command into, defaults to current project root.
+    //"cwd": "/path/to/working/directory",
+    // Whether to use a new terminal tab or reuse the existing one to spawn the process, defaults to `false`.
+    "use_new_terminal": false,
+    // Whether to allow multiple instances of the same task to be run, or rather wait for the existing ones to finish, defaults to `false`.
+    "allow_concurrent_runs": false,
+    "reveal": "always",
+    "hide": "always"
+  },
+  {
+    "label": "FZFFiles",
+    "command": "zed $(fd . --exclude \".git\" | fzf --multi  --height=100% --info=inline --prompt='$>' --pointer='→' --marker='♡' --preview='bat --color=always --style=header,grid,numbers --line-range :500 {}')",
+    // rest of the parameters are optional
+    // "args": ["-c", "for i in {1..5}; do echo "Hello $i/5\"; sleep 1; done"],
+    // Env overrides for the command, will be appended to the terminal's environment from the settings.
+    // "env": { "foo": "bar" },
+    // Current working directory to spawn the command into, defaults to current project root.
+    //"cwd": "/path/to/working/directory",
+    // Whether to use a new terminal tab or reuse the existing one to spawn the process, defaults to `false`.
+    "use_new_terminal": false,
+    // "target": {
+    //   "terminal_panel": {
+    //     "dispaly": "zoom"
+    //   },
+    // }
+    // Whether to allow multiple instances of the same task to be run, or rather wait for the existing ones to finish, defaults to `false`.
+    "allow_concurrent_runs": false,
+    "reveal": "always",
+    "hide": "always"
+  }
+]

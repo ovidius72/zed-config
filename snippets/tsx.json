@@ -1,0 +1,26 @@
+{
+  "console_log": {
+    "prefix": "clog",
+    "body": ["console.log(\"****: $1\"${2})"],
+    "description": "Expand `log` to `console.log()`"
+  },
+  "functional_component": {
+    "prefix": "rfc",
+    "body": [
+      "import {FC} from 'react';",
+      "",
+      "type ${1}Props = {",
+      "\t${2}",
+      "};",
+      "const $1: FC<${1}Props> = () => {",
+      "  return (",
+      "    <div>",
+      "      $0",
+      "    </div>",
+      "  );",
+      "};",
+      "",
+      "export { $1, type ${1}Props };"
+    ]
+  }
+}
