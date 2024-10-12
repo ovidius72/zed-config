@@ -24,9 +24,10 @@
     "bindings": {
       "ctrl-;": "terminal_panel::ToggleFocus",
       "ctrl-'": "workspace::ToggleBottomDock",
+      "ctrl-]": "workspace::ToggleRightDock",
       "ctrl-.": "workspace::ToggleZoom",
-      "alt-q": "pane::CloseActiveItem",
-      "ctrl-/": ["workspace::SendKeystrokes", "alt-q ctrl-;"]
+      "alt-q": "pane::CloseActiveItem"
+      // "ctrl-/": ["workspace::SendKeystrokes", "alt-q ctrl-;"]
     }
   },
   {
@@ -66,6 +67,7 @@
       // After deletion of the last file in a directory we should stay inside
       // the current directory, but instead it jumps to the root of the project.
       "shift-d": "project_panel::Delete",
+      "r": "project_panel::Delete",
       // Works when the current selection in the project panel is a directory.
       // I think this should also work when the current selection is a file
       // on whichever directory that file is in.
@@ -98,23 +100,24 @@
   {
     "context": "Editor && vim_mode == visual",
     "bindings": {
-      "g c": "vim::ToggleComments"
+      // "g c": "vim::ToggleComments"
     }
   },
   {
     "context": "VimControl && !menu",
     "bindings": {
-      "*": ["workspace::SendKeystrokes", "v i w cmd-f enter cmd-g "]
-      // "b v e y o console.log(\"****: \",  ) ctrl-c F\" h h h p f, l l p"],
-      // "#": "vim::FindBackward"
+      "*": ["vim::MoveToNext", { "regex": true, "caseSensitive": true }],
+      "#": ["vim::MoveToPrev", { "regex": true, "caseSensitive": true }]
     }
   },
   {
     "context": "Editor && vim_mode == normal",
     "bindings": {
       "ctrl f": "editor::ConfirmCompletion",
+      ".": "vim::Repeat",
       "space h t": "zed::OpenTasks",
-      "g c c": "vim::ToggleComments",
+      "g shift-e": "editor::OpenExcerptsSplit",
+      // "g c c": "vim::ToggleComments",
       "space f g": [
         "task::Spawn",
         {
@@ -157,6 +160,7 @@
       "ctrl-p": "projects::OpenRecent",
       "space w n": "workspace::NewWindow",
       "space s a": "workspace::NewSearch",
+      "space s f": "workspace::NewSearch",
       "space w q": "workspace::CloseWindow",
       "space z": "workspace::ToggleZoom",
       "ctrl-.": "workspace::ToggleZoom",
@@ -177,17 +181,20 @@
       "space f f": "editor::Format",
       // "space f o": "editor::OrganizeImports",
       "space f s": "workspace::SaveAll",
+      "space f S": "workspace::SaveWithoutFormat",
       "space f w": ["workspace::SendKeystrokes", "v i w g / enter"],
       // "ctrl-/": ["workspace::SendKeystrokes", "alt-q ctrl-;"]
       // "space i": "file_finder::Toggle",
       "space a m": "markdown::OpenPreview",
+      "space a j": "journal::NewJournalEntry",
       "space a l": "workspace::ToggleCenteredLayout",
-      "space a i": "workspace::ToggleRightDock",
+      "ctrl-]": "workspace::ToggleRightDock",
       "space a t": "workspace::NewTerminal",
       // "space tab": "pane::ActivatePrevItem",
       "space tab": "pane::AlternateFile",
       "space w v": "pane::SplitRight",
       "space w s": "pane::SplitDown",
+      "space shift-q": "workspace::CloseWindow",
       "space w d": "pane::CloseAllItems",
       // actions
       "space c o": "editor::ToggleCodeActions",
@@ -197,11 +204,11 @@
       // buffers
       "space b k": "pane::CloseActiveItem",
       "space b o": "pane::CloseInactiveItems",
-      "space b O": "workspace::CloseInactiveTabsAndPanes",
+      "space b shift-o": "workspace::CloseInactiveTabsAndPanes",
       // "] b": "pane::ActivateNextItem",
       // "[ b": "pane::ActivatePrevItem",
-      "cmd-[": "pane::ActivateNextItem",
-      "cmd-]": "pane::ActivatePrevItem",
+      "cmd-]": "pane::ActivateNextItem",
+      "cmd-[": "pane::ActivatePrevItem",
       // terminal
       "ctrl-t": "workspace::NewCenterTerminal",
       "ctrl-;": "terminal_panel::ToggleFocus",

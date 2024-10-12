@@ -7,6 +7,9 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "outline_panel": {
+    "dock": "right"
+  },
   "language_models": {
     "ollama": {
       "api_url": "http://localhost:11434"
@@ -14,12 +17,13 @@
   },
   "remove_trailing_whitespace_on_save": false,
   "session": {
-    "restore_unsaved_buffers": true,
+    "restore_unsaved_buffers": true
   },
   "tab_bar": {
     "show": true,
     "show_nav_history_buttons": true
   },
+  "cursor_shape": "hollow",
   "indent_guides": {
     "background_coloring": "indent_aware",
     "active_line_width": 4,
@@ -32,10 +36,10 @@
     "close_position": "left"
   },
   // "preview_tabs": { "enable_preview_from_code_navigation": true },
-  "seed_search_query_from_cursor": "selection",
+  "seed_search_query_from_cursor": "always",
   "show_signature_help_after_edits": true,
   "auto_update_extensions": {
-    "emmet": false,
+    "emmet": true,
     "enabled": true
   },
   "use_auto_surround": true,
@@ -64,18 +68,30 @@
     "working_directory": "current_project_directory",
     "default_height": 1000,
     "copy_on_select": true,
+    "cursor_shape": "block",
     "line_height": "standard"
   },
   "telemetry": {
     "diagnostics": false,
     "metrics": false
   },
-  "theme": "Zedokai Darker (Filter Spectrum)",
+  "diagnostics": {
+    "include_warnings": true
+  },
+  "theme": "Rosé Pine Dawn",
+  "experimental.theme_overrides": {
+    "syntax": {
+      // "variable": { "font_style": "italic" },
+      "keyword": { "font_style": "italic" },
+      "comment": { "font_style": "italic" }
+    }
+  },
   "vim_mode": true,
   "vim": {
     "use_multiline_find": true,
-    "use_smartcase_find": true
-    // "use_system_clipboard": "never"
+    "toggle_relative_line_numbers": true,
+    "use_smartcase_find": true,
+    "use_system_clipboard": "never"
   },
   "relative_line_numbers": true,
   "buffer_font_size": 16,
@@ -106,7 +122,7 @@
   },
   "project_panel": {
     "auto_fold_dirs": false,
-    "auto_reveal_entries": false,
+    "auto_reveal_entries": true,
     "show_hidden_files": true
   },
   "formatter": "auto",
@@ -163,12 +179,20 @@
   //   }
   // }
   "lsp": {
+    "scls": {
+      "initialization_options": {
+        "max_completion_items": 6, // set max completion results len for each group: words, snippets, unicode-input
+        "feature_words": true, // enable completion by word
+        "feature_unicode_input": true, // enable "unicode input"
+        "snippets_first": true, // completions will return before snippets by default
+        "feature_snippets": true, // enable snippets
+        "feature_paths": true // enable path completion
+      }
+    },
     "eslint": {
       "settings": {
         "codeActionOnSave": {
-          "rules": [
-            "import/order"
-          ]
+          "rules": ["import/order"]
         }
       }
     }

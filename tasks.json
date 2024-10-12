@@ -23,7 +23,7 @@
   },
   {
     "label": "FZFGitChanged",
-    "command": "zed $(git diff --name-only --diff-filter=d origin/master | fzf --multi --height=100% --border=double --info=inline --prompt='$>' --pointer='→' --marker='♡' --preview='bat --color=always --style=header,grid,numbers --line-range :500 {}' --header='CTRL-c or ESC to quit' --color='dark,fg:magenta')",
+    "command": "zed $(git diff --name-only --diff-filter=d `git merge-base origin/master HEAD` | fzf --multi --height=100% --border=double --info=inline --prompt='$>' --pointer='→' --marker='♡' --preview='bat --color=always --style=header,grid,numbers --line-range :500 {}' --header='CTRL-c or ESC to quit' --color='dark,fg:magenta')",
     // rest of the parameters are optional
     // "args": ["-c", "for i in {1..5}; do echo \"Hello $i/5\"; sleep 1; done"],
     // Env overrides for the command, will be appended to the terminal's environment from the settings.

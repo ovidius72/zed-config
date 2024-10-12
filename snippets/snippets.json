@@ -1,7 +1,7 @@
 {
   "author_meta": {
     "prefix": "auth",
-    "body": ["// *** Antonio Pantano ***", "// file: NAME"],
+    "body": ["// *** Antonio Pantano ***", "// file: TM_FILENAME_BASE}"],
     "description": "File author metadata"
   }
 }
