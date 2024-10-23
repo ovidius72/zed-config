@@ -39,6 +39,7 @@
   "seed_search_query_from_cursor": "always",
   "show_signature_help_after_edits": true,
   "auto_update_extensions": {
+    "markdown-oxide": false,
     "emmet": true,
     "enabled": true
   },
@@ -80,6 +81,8 @@
   },
   "theme": "Rosé Pine Dawn",
   "experimental.theme_overrides": {
+    // "background": "#FDF6E3",
+    // "editor.background": "#FDF6E3",
     "syntax": {
       // "variable": { "font_style": "italic" },
       "keyword": { "font_style": "italic" },
@@ -180,6 +183,7 @@
   // }
   "lsp": {
     "scls": {
+      // simple completion language server.
       "initialization_options": {
         "max_completion_items": 6, // set max completion results len for each group: words, snippets, unicode-input
         "feature_words": true, // enable completion by word
