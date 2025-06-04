@@ -7,7 +7,31 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
-  "icon_theme": "Material Icon Theme",
+  "search_wrap": true,
+  "use_smartcase_search": false,
+  "debugger": {
+    "dock": "bottom",
+    "save_breakpoints": true,
+    "stepping_granularity": "line",
+    "button": true
+  },
+
+  "bottom_dock_layout": "contained",
+  "edit_predictions": {
+    "disabled_globs": [],
+    "mode": "subtle",
+    "copilot": {
+      "proxy": null,
+      "proxy_no_verify": null
+    },
+    "enabled_in_text_threads": false
+  },
+  "hide_mouse": "on_typing_and_movement",
+  "icon_theme": {
+    "mode": "dark",
+    "dark": "Zed (Default)",
+    "light": "Catppuccin Latte"
+  },
   "outline_panel": {
     "auto_reveal_entries": true,
     "file_icons": true,
@@ -15,10 +39,14 @@
     "git_status": true,
     "dock": "right"
   },
-  // "show_completion_documentation": false,
-  // "show_completions_on_input": false,
-  // "auto_signature_help": false,
-  // "show_inline_completions_in_menu": false,
+  "show_completion_documentation": false,
+  "show_completions_on_input": true,
+  "completions": {
+    "words": "fallback"
+  },
+  "wrap_guides": [80],
+  "ui_font_features": { "calt": true },
+  "auto_signature_help": false,
   "file_finder": {
     "file_icons": true,
     "modal_max_width": "medium"
@@ -34,6 +62,7 @@
   },
   "tab_bar": {
     "show": true,
+    "show_tab_bar_buttons": true,
     "show_nav_history_buttons": true
   },
   "cursor_shape": "hollow",
@@ -43,14 +72,18 @@
     "coloring": "indent_aware",
     "line_width": 3
   },
+  "auto_indent_on_paste": true,
+  "command_aliases": {},
   "tabs": {
     "file_icons": true,
+    "show_diagnostics": "errors",
+    "show_close_button": "always",
     "git_status": true,
     "close_position": "left"
   },
   // "preview_tabs": { "enable_preview_from_code_navigation": true },
   "seed_search_query_from_cursor": "always",
-  "show_signature_help_after_edits": true,
+  "show_signature_help_after_edits": false,
   "auto_update_extensions": {
     "markdown-oxide": false,
     "emmet": true,
@@ -58,30 +91,35 @@
   },
   "use_auto_surround": true,
   "use_autoclose": true,
-  "show_edit_predictions": true,
+  "show_edit_predictions": false,
   "show_wrap_guides": true,
   "show_call_status_icon": true,
   "current_line_highlight": "line",
   "cursor_blink": true,
   "always_treat_brackets_as_autoclosed": true,
   "features": {
-        "edit_prediction_provider": "zed"
-    },
-  "ui_font_family": "Maple Mono",
+    "edit_prediction_provider": "zed"
+  },
+  // "ui_font_family": "Maple Mono",
+  "ui_font_family": "input",
   "ui_font_size": 16,
   // "buffer_font_features": {},
-  "buffer_font_family": "Maple Mono",
-  "buffer_font_features": {},
+  "buffer_font_family": "input",
+  "buffer_font_features": {
+    "calt": true
+    // "cv01": 7
+  },
   "confirm_quit": true,
   "auto_update": true,
   "code_actions_on_format": {
     "source.organizeImports": true
   },
+  "minimap": { "show": "never" },
   "terminal": {
     "font_family": "JetBrainsMono Nerd Font",
     "dock": "bottom",
     "working_directory": "current_project_directory",
-    "default_height": 1000,
+    // "default_height": 1000,
     "copy_on_select": true,
     "cursor_shape": "block",
     "line_height": "standard"
@@ -91,9 +129,16 @@
     "metrics": false
   },
   "diagnostics": {
-    "include_warnings": true
+    "include_warnings": true,
+    "inline": {
+      "enabled": false,
+      "update_debounce_ms": 150,
+      "padding": 4,
+      "min_column": 0,
+      "max_severity": null
+    }
   },
-  "theme": "Kanagawa",
+  "theme": "Zedokai Darker (Filter Octagon)",
   "experimental.theme_overrides": {
     // "background": "#FDF6E3",
     // "editor.background": "#FDF6E3",
@@ -112,12 +157,19 @@
     "use_multiline_find": true,
     "toggle_relative_line_numbers": true,
     "use_smartcase_find": true,
-    "use_system_clipboard": "never"
+    "use_system_clipboard": "never",
+    "cursor_shape": {
+      "normal": "hollow",
+      "insert": "bar",
+      "replace": "block",
+      "visual": "bar"
+    }
   },
   "relative_line_numbers": true,
   "buffer_font_size": 16.0,
   "git": {
     "gutter_debounce": 200,
+    "hunk_style": "staged_hollow",
     "git_gutter": "tracked_files",
     "inline_blame": {
       "show_commit_summary": true,
@@ -130,17 +182,18 @@
   // "show": "never"
   // },
   "tab_size": 2,
-  "assistant": {
+  "agent": {
+    "inline_assistant_model": {
+      "provider": "ollama",
+      "model": "qwen2.5-coder:32b"
+    },
     "version": "2",
-    "provider": null,
     // "provider": {
     "default_model": {
       "provider": "ollama",
-      "model": "codellama:34b"
-    },
-    "name": "ollama",
-    // Recommended setting to allow for model startup
-    "low_speed_timeout_in_seconds": null
+      // "model": "qwen2.5-coder:32b"
+      "model": "deepseek-coder:6.7b"
+    }
   },
   "project_panel": {
     "auto_fold_dirs": false,
@@ -197,23 +250,78 @@
     "JavaScript": {
       "code_actions_on_format": {
         "source.organizeImports": true
-      },
-      "formatter": {
-        "external": {
-          "command": "prettier",
-          "arguments": ["--stdin-filepath", "{buffer_path}"]
-        }
       }
+      // "formatter": {
+      //   "external": {
+      //     "command": "prettier",
+      //     "arguments": ["--stdin-filepath", "{buffer_path}"]
+      //   }
+      // }
     }
   },
+  "snippet_sort_order": "inline",
+  "hover_popover_delay": 600,
   "lsp": {
-    "angular": {
-      // "initialization_options": {
-      //   "angular_language_service_version": "19.0.0",
-      //   "typescript_version": "5.6.2"
-      // }
+    "rust-analyzer": {
+      "initialization_options": {
+        // "inlayHints": {
+        //   "expressionAdjustmentHints": { "enable": "reborrow" }
+        // },
+        "completion": {
+          "snippets": {
+            "custom": {
+              "Arc::new": {
+                "postfix": "arc",
+                "body": ["Arc::new(${receiver})"],
+                "requires": "std::sync::Arc",
+                "scope": "expr"
+              },
+              "Some": {
+                "postfix": "some",
+                "body": ["Some(${receiver})"],
+                "scope": "expr"
+              },
+              "Ok": {
+                "postfix": "ok",
+                "body": ["Ok(${receiver})"],
+                "scope": "expr"
+              },
+              "Rc::new": {
+                "postfix": "rc",
+                "body": ["Rc::new(${receiver})"],
+                "requires": "std::rc::Rc",
+                "scope": "expr"
+              },
+              "Box::pin": {
+                "postfix": "boxpin",
+                "body": ["Box::pin(${receiver})"],
+                "requires": "std::boxed::Box",
+                "scope": "expr"
+              },
+              "vec!": {
+                "postfix": "vec",
+                "body": ["vec![${receiver}]"],
+                "description": "vec![]",
+                "scope": "expr"
+              }
+            }
+          }
+        },
+        "diagnostics": {
+          "experimental": {
+            "enable": true
+          }
+        }
+      }
     },
+    // "angular": {
+    //   // "initialization_options": {
+    //   //   "angular_language_service_version": "19.0.0",
+    //   //   "typescript_version": "5.6.2"
+    //   // }
+    // },
     "scls": {
+      "enable_lsp_tasks": true,
       // simple completion language server.
       "initialization_options": {
         "max_completion_items": 6, // set max completion results len for each group: words, snippets, unicode-input
@@ -228,6 +336,19 @@
       "settings": {
         "codeActionOnSave": {
           "rules": ["import/order"]
+        }
+      }
+    },
+    "biome": {
+      "enabled": false,
+      "settings": {
+        "require_config_file": true,
+        "linter": {
+          "rules": {
+            "complexity": {
+              "noForEach": "error"
+            }
+          }
         }
       }
     },

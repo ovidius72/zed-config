@@ -6,10 +6,17 @@
   {
     // APPLY TO ALL CONTEXTS
     "bindings": {
+      // "ctrl-r": "editor::ShowWordCompletions",
+      "alt-i": "editor::ShowSignatureHelp",
+      "cmd-]": "pane::ActivateNextItem",
+      "cmd-[": "pane::ActivatePreviousItem",
       "ctrl-k": "menu::SelectPrevious",
       "ctrl-j": "menu::SelectNext",
       "ctrl-;": "terminal_panel::ToggleFocus",
       "ctrl-/": "vim::ToggleRegistersView",
+      "ctrl-alt-p": "editor::MoveToEndOfPreviousExcerpt",
+      "ctrl-alt-n": "editor::MoveToStartOfNextExcerpt",
+      "cmd-l": "editor::ToggleRelativeLineNumbers",
       "ctrl-shift-1": ["workspace::MoveItemToPane", { "destination": 0 }],
       "ctrl-shift-2": [
         "workspace::MoveItemToPane",
@@ -47,6 +54,13 @@
         "workspace::MoveItemToPaneInDirection",
         { "direction": "down" }
       ]
+    }
+  },
+  {
+    "context": "Excerpts",
+    "bindings": {
+      "ctrl-p": "editor::SelectToEndOfPreviousExcerpt",
+      "ctrl-n": "editor::SelectToStartOfNextExcerpt"
     }
   },
   {
@@ -144,17 +158,11 @@
       "shift-s": ["vim::PushAddSurrounds", {}]
     }
   },
-  // {
-  //   "context": "vim_mode == normal || vim_mode == visual",
-  //   "bindings": {
-  //     "ctrl-s": ["vim::PushOperator", { "Sneak": {} }],
-  //     "alt-s'": ["vim::PushOperator", { "SneakBackward": {} }]
-  //   }
-  // },
   {
-    "context": "Editor && vim_mode == visual",
+    "context": "vim_mode == normal || vim_mode == visual",
     "bindings": {
-      // "g c": "vim::ToggleComments"
+      "ctrl-n": ["vim::PushOperator", { "Sneak": {} }],
+      "ctrl-s": ["vim::PushOperator", { "SneakBackward": {} }]
     }
   },
   {
@@ -175,6 +183,8 @@
       "ctrl-cmd-m": "vim::ResetPaneSizes",
       ".": "vim::Repeat",
       "space h t": "zed::OpenTasks",
+      "space m": ["workspace::SendKeystrokes", ": marks enter"],
+      "space h p": "editor::ShowCharacterPalette",
       "g shift-e": "editor::OpenExcerptsSplit",
       // "g c c": "vim::ToggleComments",
       "space f g": ["task::Spawn", { "task_name": "fzf_git_changed" }],
@@ -207,6 +217,10 @@
       "space z": "workspace::ToggleZoom",
       "ctrl-.": "workspace::ToggleZoom",
       "space g b": "git::Branch",
+      "space g s": "git::ToggleStaged",
+      "space g r": "git::Restore",
+      "space g p": "git_panel::ToggleFocus",
+      "space g c": "git::ExpandCommitEditor",
       "space g ;": "git::Blame",
       "space g l": "editor::ToggleGitBlameInline",
       // Not working. check it.
@@ -229,8 +243,6 @@
       "space f s": "workspace::SaveAll",
       "space f n": "workspace::SaveWithoutFormat",
       "space f w": ["workspace::SendKeystrokes", "v i w g / enter"],
-      // "ctrl-/": ["workspace::SendKeystrokes", "alt-q ctrl-;"]
-      // "space i": "file_finder::Toggle",
       "space a m": "markdown::OpenPreview",
       "space a i": "assistant::ToggleFocus",
       "space a j": "journal::NewJournalEntry",
@@ -253,13 +265,12 @@
       "space b k": "pane::CloseActiveItem",
       "space b o": "pane::CloseInactiveItems",
       "space b shift-o": "workspace::CloseInactiveTabsAndPanes",
-      // "] b": "pane::ActivateNextItem",
-      // "[ b": "pane::ActivatePrevItem",
-      "cmd-]": "pane::ActivateNextItem",
-      "cmd-[": "pane::ActivatePreviousItem",
+      "] b": "pane::ActivateNextItem",
+      "[ b": "pane::ActivatePreviousItem",
+      "] w": "workspace::ActivateNextWindow",
+      "[ w": "workspace::ActivatePreviousWindow",
       // terminal
       "ctrl-t": "workspace::NewCenterTerminal",
-      "ctrl-;": "terminal_panel::ToggleFocus",
       "ctrl-l": "workspace::ActivatePaneRight",
       "ctrl-k": "workspace::ActivatePaneUp",
       "ctrl-j": "workspace::ActivatePaneDown",
@@ -279,13 +290,11 @@
     "context": "Editor && (showing_code_actions || showing_completions)",
     "bindings": {
       "escape": "editor::ToggleCodeActions",
-      "ctrl-c": "editor::ToggleCodeActions",
+      "ctrl-e": "editor::ShowCompletions",
       "ctrl-k": "editor::ContextMenuPrevious",
       "ctrl-j": "editor::ContextMenuNext",
       "ctrl-p": "editor::ContextMenuPrevious",
       "ctrl-n": "editor::ContextMenuNext",
-      // "j": "editor::ContextMenuNext",
-      // "k": "editor::ContextMenuPrev",
       "pageup": "editor::ContextMenuFirst",
       "pagedown": "editor::ContextMenuLast"
     }

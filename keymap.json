@@ -1,15 +1,36 @@
 [
   // {
   //   "context": "Workspace",
-  //   "bindings": {}
+  //   "bindings": {
+  //   }
   // },
+  {
+    "context": "(vim_mode == normal || vim_mode == visual || vim_mode == waiting) && multibuffer",
+    "bindings": {
+      "[ e": "editor::MoveToEndOfPreviousExcerpt",
+      "] e": "editor::MoveToStartOfNextExcerpt",
+      "] f": "search::SelectNextMatch",
+      "[ f": "search::SelectPreviousMatch",
+      "space shift-y": ["workspace::SendKeystrokes", "\" 0 p"],
+      "enter": "vim::SearchSubmit",
+      "escape": "buffer_search::Dismiss"
+    }
+  },
   {
     // APPLY TO ALL CONTEXTS
     "bindings": {
+      // "ctrl-r": "editor::ShowWordCompletions",
+      "alt-i": "editor::ShowSignatureHelp",
+      // "ctrl-c": "vim::SwitchToNormalMode",
+      "cmd-]": "pane::ActivateNextItem",
+      "ctrl-c": "menu::Cancel",
+      "cmd-[": "pane::ActivatePreviousItem",
       "ctrl-k": "menu::SelectPrevious",
       "ctrl-j": "menu::SelectNext",
       "ctrl-;": "terminal_panel::ToggleFocus",
       "ctrl-/": "vim::ToggleRegistersView",
+      "ctrl-alt-p": "editor::MoveToEndOfPreviousExcerpt",
+      "ctrl-alt-n": "editor::MoveToStartOfNextExcerpt",
       "ctrl-shift-1": ["workspace::MoveItemToPane", { "destination": 0 }],
       "ctrl-shift-2": [
         "workspace::MoveItemToPane",
@@ -50,20 +71,33 @@
     }
   },
   {
+    "context": "Excerpts",
+    "bindings": {
+      // "ctrl-p": "editor::SelectToEndOfPreviousExcerpt",
+      // "ctrl-n": "editor::SelectToStartOfNextExcerpt"
+    }
+  },
+  {
     "context": "Editor && vim_mode == insert",
     "bindings": {
       "j j": "vim::NormalBefore",
       "ctrl-f": "editor::AcceptPartialCopilotSuggestion",
       "alt-[": "copilot::NextSuggestion",
       "alt-]": "copilot::PreviousSuggestion",
-      "alt-ctrl-j": "editor::AddSelectionBelow",
-      "alt-ctrl-k": "editor::AddSelectionAbove"
+      "alt-cmd-j": "editor::AddSelectionBelow",
+      "alt-cmd-k": "editor::AddSelectionAbove"
     }
   },
   {
     "context": "Terminal",
     "bindings": {
+      "ctrl-,": "workspace::NewTerminal",
+      "alt-right": "vim::ResizePaneRight",
+      "alt-left": "vim::ResizePaneLeft",
+      "alt-down": "vim::ResizePaneDown",
+      "alt-up": "vim::ResizePaneUp",
       "ctrl-;": "terminal_panel::ToggleFocus",
+      "ctrl-c": ["terminal::SendKeystroke", "ctrl-c"],
       "ctrl-'": "workspace::ToggleBottomDock",
       "ctrl-]": "workspace::ToggleRightDock",
       "ctrl-.": "workspace::ToggleZoom",
@@ -73,7 +107,11 @@
       "alt-j": "workspace::ActivatePaneDown",
       "alt-h": "workspace::ActivatePaneLeft",
       "alt-s": "pane::SplitHorizontal",
-      "alt-v": "pane::SplitVertical"
+      "alt-v": "pane::SplitVertical",
+      "cmd-alt-k": "pane::SplitUp",
+      "cmd-alt-j": "pane::SplitDown",
+      "cmd-alt-h": "pane::SplitLeft",
+      "cmd-alt-l": "pane::SplitRight"
       // "ctrl-/": ["workspace::SendKeystrokes", "alt-q ctrl-;"]
     }
   },
@@ -84,6 +122,8 @@
       "space ]": "project_panel::ToggleFocus",
       "ctrl-l": "project_panel::ToggleFocus",
       "space [": "workspace::ToggleLeftDock",
+      "ctrl-alt-[": "workspace::ToggleLeftDock",
+      "ctrl-[": "project_panel::ToggleFocus",
       // "l": "project_panel::ExpandSelectedEntry",
       "ctrl-k": "editor::MoveUp",
       "ctrl-j": "editor::MoveDown",
@@ -144,17 +184,11 @@
       "shift-s": ["vim::PushAddSurrounds", {}]
     }
   },
-  // {
-  //   "context": "vim_mode == normal || vim_mode == visual",
-  //   "bindings": {
-  //     "ctrl-s": ["vim::PushOperator", { "Sneak": {} }],
-  //     "alt-s'": ["vim::PushOperator", { "SneakBackward": {} }]
-  //   }
-  // },
   {
-    "context": "Editor && vim_mode == visual",
+    "context": "vim_mode == normal || vim_mode == visual && !multibuffer",
     "bindings": {
-      // "g c": "vim::ToggleComments"
+      "ctrl-n": ["vim::PushSneak", {}],
+      "ctrl-s": ["vim::PushSneakBackward", {}]
     }
   },
   {
@@ -165,77 +199,124 @@
     }
   },
   {
-    "context": "Editor && vim_mode == normal",
+    "context": "AssistantPanel || AgentPanel",
     "bindings": {
-      "ctrl-cmd-l": "vim::ResizePaneRight",
-      "ctrl-cmd-h": "vim::ResizePaneLeft",
-      "ctrl-cmd-j": "vim::ResizePaneDown",
-      "ctrl-cmd-k": "vim::ResizePaneUp",
+      "ctrl-alt-]": "workspace::ToggleRightDock",
+      "ctrl-]": "agent::ToggleFocus"
+    }
+  },
+  // {
+  //   "context": "Editor && vim_mode == normal && !multibuffer"
+  // },
+  {
+    "context": "Editor && vim_mode == normal && !multibuffer",
+    "bindings": {
+      "alt-right": "vim::ResizePaneRight",
+      "alt-left": "vim::ResizePaneLeft",
+      "alt-down": "vim::ResizePaneDown",
+      "alt-up": "vim::ResizePaneUp",
       "ctrl-cmd-n": "vim::MaximizePane",
       "ctrl-cmd-m": "vim::ResetPaneSizes",
+      "space shift-y": ["workspace::SendKeystrokes", "V \" + y"],
       ".": "vim::Repeat",
       "space h t": "zed::OpenTasks",
+      "space m": "vim::ToggleMarksView",
+      "space h p": "editor::ShowCharacterPalette",
+      "space t l": "editor::ToggleRelativeLineNumbers",
       "g shift-e": "editor::OpenExcerptsSplit",
       // "g c c": "vim::ToggleComments",
-      "space f g": ["task::Spawn", { "task_name": "fzf_git_changed" }],
-      "space f a": ["task::Spawn", { "task_name": "fzf_content" }],
-      "space f i": ["task::Spawn", { "task_name": "fzf_files" }],
-      "space a a": ["task::Spawn", { "task_name": "atac" }],
-      "space g G": ["task::Spawn", { "task_name": "lazy_git" }],
-      "space g g": ["task::Spawn", { "task_name": "lazy_git" }],
+      "space f g": ["task::Spawn", { "task_name": "FZFGitChanged" }],
+      "space f a": [
+        "task::Spawn",
+        { "task_name": "FZFContent", "reveal_target": "center" }
+      ],
+      "space f i": ["task::Spawn", { "task_name": "FZFFiles" }],
+      "space a a": [
+        "task::Spawn",
+        { "task_name": "Atac", "reveal_targer": "center" }
+      ],
+      "space g G": ["task::Spawn", { "task_name": "LazyGit" }],
+      "space g g": [
+        "task::Spawn",
+        { "task_name": "LazyGit", "reveal_target": "center" }
+      ],
       "space o l": [
         "workspace::SendKeystrokes",
         "v i w y o console.log(\"****: \",  ) ctrl-c F\" h h h p f, l l p"
       ],
-      "space g t": [
+      "space g T": [
         "workspace::SendKeystrokes",
         "ctrl-; cmd-shift-p workspace zoom enter ctrl-c lazygit enter"
       ],
-      "ctrl-,": [
-        "workspace::SendKeystrokes",
-        "cmd-shift-p toggle left dock enter"
-      ],
+      // "ctrl-,": [
+      //   "workspace::SendKeystrokes",
+      //   "cmd-shift-p toggle left dock enter"
+      // ],
       "alt-j": "editor::MoveLineDown",
       "alt-k": "editor::MoveLineUp",
       "space l": "tab_switcher::Toggle",
       "ctrl-p": "projects::OpenRecent",
       "space w n": "workspace::NewWindow",
-      "space s a": "pane::DeploySearch",
+      "space s a": [
+        "pane::DeploySearch",
+        {
+          "excluded_files": "**/build/**,**/dist/**,**/.next/**,vite.config.ts,package-lock.json"
+        }
+      ],
       "space s s": "buffer_search::Deploy",
       "space s f": "workspace::NewSearch",
       "space w q": "workspace::CloseWindow",
       "space z": "workspace::ToggleZoom",
       "ctrl-.": "workspace::ToggleZoom",
       "space g b": "git::Branch",
+      "space g A": "git::StageFile",
+      "space g a": "git::StageAll",
+      "space g s": "git::ToggleStaged",
+      "space g p": "git::Push",
+      "space g r": "git::Restore",
+      "space g f": "git_panel::ToggleFocus",
+      "ctrl-\\": "git_panel::ToggleFocus",
+      // "ctrl-alt-\\": ["git_panel::ToggleFocus", ""],
+      "space g c": "git::ExpandCommitEditor",
+      "space g C": "git::Commit",
+      "space g d": "git::Diff",
       "space g ;": "git::Blame",
       "space g l": "editor::ToggleGitBlameInline",
+      "space h i": "editor::ToggleInlayHints",
       // Not working. check it.
-      // "g h": "editor::ToggleSelectedDiffHunks",
-      // "g T": "editor::ToggleStagedSelectedDiffHunks",
+      "g h": "editor::ToggleSelectedDiffHunks",
+      "g H": "editor::ExpandAllDiffHunks",
+      "g a": "editor::ApplyDiffHunk",
       "g m": "git::Restore",
       "] g": "editor::GoToHunk",
       "[ g": "editor::GoToPreviousHunk",
       "space t t": "task::Spawn",
+      "space t r": "task::Rerun",
       "space i": "file_finder::Toggle",
       "ctrl-'": "workspace::ToggleBottomDock",
       "space [": "workspace::ToggleLeftDock",
+      "ctrl-alt-[": "workspace::ToggleLeftDock",
       "space ]": "pane::RevealInProjectPanel",
+      "space u": "editor::GoToPreviousDiagnostic",
+      "space d l": "editor::ToggleInlineDiagnostics",
+      "space d d": "diagnostics::Deploy",
       "[ d": "editor::GoToPreviousDiagnostic",
       "] d": "editor::GoToDiagnostic",
-      "space t d": "diagnostics::Deploy",
       "space f f": "editor::Format",
       "space f o": "editor::OrganizeImports",
-      // "space f o": "editor::OrganizeImports",
       "space f s": "workspace::SaveAll",
+      "space f S": "workspace::Save",
       "space f n": "workspace::SaveWithoutFormat",
       "space f w": ["workspace::SendKeystrokes", "v i w g / enter"],
-      // "ctrl-/": ["workspace::SendKeystrokes", "alt-q ctrl-;"]
-      // "space i": "file_finder::Toggle",
       "space a m": "markdown::OpenPreview",
-      "space a i": "assistant::ToggleFocus",
+      // "space a i": "assistant::ToggleFocus",
+      "ctrl-]": "agent::ToggleFocus",
+      // "cmd-'": "workspace::ToggleRightDock",
+      "ctrl-alt-]": "workspace::ToggleRightDock",
       "space a j": "journal::NewJournalEntry",
       "space a l": "workspace::ToggleCenteredLayout",
-      "ctrl-]": "workspace::ToggleRightDock",
+      // "ctrl-]": "workspace::ToggleRightDock",
+      "ctrl-[": "project_panel::ToggleFocus",
       "space a t": "workspace::NewTerminal",
       // "space tab": "pane::ActivatePrevItem",
       "space tab": "pane::AlternateFile",
@@ -253,13 +334,12 @@
       "space b k": "pane::CloseActiveItem",
       "space b o": "pane::CloseInactiveItems",
       "space b shift-o": "workspace::CloseInactiveTabsAndPanes",
-      // "] b": "pane::ActivateNextItem",
-      // "[ b": "pane::ActivatePrevItem",
-      "cmd-]": "pane::ActivateNextItem",
-      "cmd-[": "pane::ActivatePreviousItem",
+      "] b": "pane::ActivateNextItem",
+      "[ b": "pane::ActivatePreviousItem",
+      "] w": "workspace::ActivateNextWindow",
+      "[ w": "workspace::ActivatePreviousWindow",
       // terminal
       "ctrl-t": "workspace::NewCenterTerminal",
-      "ctrl-;": "terminal_panel::ToggleFocus",
       "ctrl-l": "workspace::ActivatePaneRight",
       "ctrl-k": "workspace::ActivatePaneUp",
       "ctrl-j": "workspace::ActivatePaneDown",
@@ -276,16 +356,32 @@
     }
   },
   {
+    "context": "GitPanel || AssistantPanel || AgentPanel",
+    "bindings": {
+      "ctrl-\\": "git_panel::ToggleFocus",
+      // "ctrl-alt-\\": "git_panel::Close",
+      "ctrl-alt-\\": "workspace::ToggleRightDock",
+      "ctrl-alt-]": "workspace::ToggleRightDock"
+    }
+  },
+  {
+    "context": "GitPanel && ChangesList",
+    "use_key_equivalents": true,
+    "bindings": {
+      "ctrl-a": "git_panel::ToggleFocus",
+      "ctrl-\\": "git_panel::ToggleFocus",
+      "ctrl-alt-\\": "workspace::ToggleRightDock"
+    }
+  },
+  {
     "context": "Editor && (showing_code_actions || showing_completions)",
     "bindings": {
       "escape": "editor::ToggleCodeActions",
-      "ctrl-c": "editor::ToggleCodeActions",
+      "ctrl-e": "editor::ShowCompletions",
       "ctrl-k": "editor::ContextMenuPrevious",
       "ctrl-j": "editor::ContextMenuNext",
       "ctrl-p": "editor::ContextMenuPrevious",
       "ctrl-n": "editor::ContextMenuNext",
-      // "j": "editor::ContextMenuNext",
-      // "k": "editor::ContextMenuPrev",
       "pageup": "editor::ContextMenuFirst",
       "pagedown": "editor::ContextMenuLast"
     }

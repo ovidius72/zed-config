@@ -9,6 +9,22 @@
     "hide": "always"
   },
   {
+    "label": "Ruby",
+    "command": "ruby $ZED_FILE",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": true,
+    "reveal": "always"
+  },
+  {
+    "label": "Run Ruby",
+    "command": "ruby",
+    "args": ["\"$ZED_RELATIVE_FILE\" -t\"$ZED_SYMBOL\""],
+    "use_new_terminal": false,
+    "allow_concurrent_runs": true,
+    "reveal": "always",
+    "tags": ["ruby-test"]
+  },
+  {
     // the --spa flag translate requests from /abc to /#/abc (handy for Single Page Apps)
     "label": "LiveServer SPA",
     "command": "live-server --port=8090 --spa --entry-file=$ZED_FILE",
@@ -49,6 +65,7 @@
     //"cwd": "/path/to/working/directory",
     // Whether to use a new terminal tab or reuse the existing one to spawn the process, defaults to `false`.
     "use_new_terminal": true,
+    "args": ["-p", "$ZED_WORKTREE_ROOT"],
     // "target": {
     //   "terminal_panel": {
     //     "dispaly": "zoom"
@@ -57,11 +74,13 @@
     // Whether to allow multiple instances of the same task to be run, or rather wait for the existing ones to finish, defaults to `false`.
     "allow_concurrent_runs": false,
     "reveal": "always",
-    "hide": "always"
+    "hide": "always",
+    "reveal_target": "center"
   },
   {
     "label": "FZFGitChanged",
-    "command": "zed $(git diff --name-only --diff-filter=d `git merge-base origin/master HEAD` | fzf --multi --height=100% --border=double --info=inline --prompt='$>' --pointer='→' --marker='♡' --preview='bat --color=always --style=header,grid,numbers --line-range :500 {}' --header='CTRL-c or ESC to quit' --color='dark,fg:magenta')",
+    "command": "zed $(git diff --name-only --diff-filter=d `git merge-base $(git branch --show-current) HEAD` | fzf --multi --height=100% --border=double --info=inline --prompt='$>' --pointer='→' --marker='♡' --preview='bat --color=always --style=header,grid,numbers --line-range :500 {}' --header='CTRL-c or ESC to quit' --color='dark,fg:magenta')",
+    // "command": "zed $(git diff --name-only | fzf -m --height=100% --ansi --border=double --info=inline --prompt='$>' --pointer='→' --marker='♡' --preview='bat --color=always --style=header,grid,numbers --line-range :500 {}' --header='CTRL-c or ESC to quit' --color='dark,fg:magenta')",
     // rest of the parameters are optional
     // "args": ["-c", "for i in {1..5}; do echo \"Hello $i/5\"; sleep 1; done"],
     // Env overrides for the command, will be appended to the terminal's environment from the settings.
@@ -78,7 +97,8 @@
     // Whether to allow multiple instances of the same task to be run, or rather wait for the existing ones to finish, defaults to `false`.
     "allow_concurrent_runs": false,
     "reveal": "always",
-    "hide": "always"
+    "hide": "always",
+    "reveal_target": "center"
   },
   {
     "label": "FZFContent",
@@ -116,5 +136,29 @@
     "allow_concurrent_runs": false,
     "reveal": "always",
     "hide": "always"
+  },
+  {
+    "label": "Run Vitest Workspace",
+    "command": "npm test",
+    // "args": ["\"$ZED_RELATIVE_FILE\" -t=\"$ZED_SYMBOL\""],
+    "tags": ["tsx-test", "ts-test"]
+  },
+  {
+    "label": "Run Vitest Symbol",
+    "command": "npm test",
+    "args": ["\"$ZED_RELATIVE_FILE\" -t=\"$ZED_SYMBOL\""],
+    "tags": ["tsx-test", "ts-test"]
+  },
+  {
+    "label": "Run Vitest UI File",
+    "command": "$ZED_WORKTREE_ROOT/node_modules/.bin/vitest --ui",
+    "args": ["\"$ZED_RELATIVE_FILE\" -t=\"$ZED_SYMBOL\""],
+    "tags": ["tsx-test", "ts-test"]
+  },
+  {
+    "label": "Run Vitest UI",
+    "command": "$ZED_WORKTREE_ROOT/node_modules/.bin/vitest --ui",
+    // "args": ["\"$ZED_RELATIVE_FILE\" -t=\"$ZED_SYMBOL\""],
+    "tags": ["tsx-test", "ts-test"]
   }
 ]
