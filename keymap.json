@@ -108,8 +108,8 @@
       "alt-h": "workspace::ActivatePaneLeft",
       "alt-s": "pane::SplitHorizontal",
       "alt-v": "pane::SplitVertical",
-      "cmd-alt-k": "pane::SplitUp",
       "cmd-alt-j": "pane::SplitDown",
+      "cmd-alt-k": "pane::SplitUp",
       "cmd-alt-h": "pane::SplitLeft",
       "cmd-alt-l": "pane::SplitRight"
       // "ctrl-/": ["workspace::SendKeystrokes", "alt-q ctrl-;"]
@@ -133,6 +133,8 @@
       "d": "project_panel::NewDirectory",
       "a": "project_panel::NewFile",
       "shift-r": "project_panel::Rename",
+      "ctrl-\\": "git_panel::ToggleFocus",
+      "ctrl-alt-\\": "workspace::ToggleRightDock",
       // These operate differently (which is fine) than in vim in that "marking"
       // the "target" always comes last. So you would do "m m" to mark the file
       // you want to move, then "m t" again to mark the target directory.
@@ -188,7 +190,20 @@
     "context": "vim_mode == normal || vim_mode == visual && !multibuffer",
     "bindings": {
       "ctrl-n": ["vim::PushSneak", {}],
-      "ctrl-s": ["vim::PushSneakBackward", {}]
+      "ctrl-s": ["vim::PushSneakBackward", {}],
+      "space tab": "pane::AlternateFile",
+      // buffers
+      "space b k": "pane::CloseActiveItem",
+      "space b o": "pane::CloseInactiveItems",
+      "space b shift-o": "workspace::CloseInactiveTabsAndPanes",
+      "] b": "pane::ActivateNextItem",
+      "[ b": "pane::ActivatePreviousItem",
+      "] w": "workspace::ActivateNextWindow",
+      "[ w": "workspace::ActivatePreviousWindow",
+      "space w v": "pane::SplitRight",
+      "space w s": "pane::SplitDown",
+      "space shift-q": "workspace::CloseWindow",
+      "space w d": "pane::CloseAllItems"
     }
   },
   {
@@ -318,26 +333,12 @@
       // "ctrl-]": "workspace::ToggleRightDock",
       "ctrl-[": "project_panel::ToggleFocus",
       "space a t": "workspace::NewTerminal",
-      // "space tab": "pane::ActivatePrevItem",
-      "space tab": "pane::AlternateFile",
-      "space w v": "pane::SplitRight",
-      "space w s": "pane::SplitDown",
-      "space shift-q": "workspace::CloseWindow",
-      "space w d": "pane::CloseAllItems",
       // actions
       "space c o": "editor::ToggleCodeActions",
       "space c m": "editor::OpenContextMenu",
       "space c r": "editor::Rename",
       "space s o": "outline::Toggle",
       "K": "editor::Hover",
-      // buffers
-      "space b k": "pane::CloseActiveItem",
-      "space b o": "pane::CloseInactiveItems",
-      "space b shift-o": "workspace::CloseInactiveTabsAndPanes",
-      "] b": "pane::ActivateNextItem",
-      "[ b": "pane::ActivatePreviousItem",
-      "] w": "workspace::ActivateNextWindow",
-      "[ w": "workspace::ActivatePreviousWindow",
       // terminal
       "ctrl-t": "workspace::NewCenterTerminal",
       "ctrl-l": "workspace::ActivatePaneRight",
