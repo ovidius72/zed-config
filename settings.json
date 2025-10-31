@@ -7,6 +7,16 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "toolbar": {
+    "code_actions": false,
+    "breadcrumbs": true,
+    "quick_actions": true
+  },
+  "inline_code_actions": true,
+  "gutter": {
+    "folds": true
+  },
+  "theme": "Catppuccin Mocha",
   "search_wrap": true,
   "use_smartcase_search": false,
   "file_types": {
@@ -36,7 +46,7 @@
   "hide_mouse": "on_typing_and_movement",
   "icon_theme": {
     "mode": "dark",
-    "dark": "Zed (Default)",
+    "dark": "Catppuccin Mocha",
     "light": "Catppuccin Latte"
   },
   "outline_panel": {
@@ -107,13 +117,13 @@
   "cursor_blink": true,
   "always_treat_brackets_as_autoclosed": true,
   "features": {
-    "edit_prediction_provider": "zed"
+    "edit_prediction_provider": "copilot"
   },
   // "ui_font_family": "Maple Mono",
-  "ui_font_family": "Input",
+  "ui_font_family": "Maple Mono NF",
   "ui_font_size": 16,
   // "buffer_font_features": {},
-  "buffer_font_family": "Input",
+  "buffer_font_family": "Maple Mono NF",
   "buffer_font_features": {
     "calt": true
     // "cv01": 7
@@ -125,7 +135,7 @@
   },
   "minimap": { "show": "never" },
   "terminal": {
-    "font_family": "JetBrainsMono Nerd Font",
+    "font_family": "Maple Mono NF",
     "dock": "bottom",
     "working_directory": "current_project_directory",
     // "default_height": 1000,
@@ -147,12 +157,8 @@
       "max_severity": null
     }
   },
-  "theme": "Panda Nebula",
   "experimental.theme_overrides": {
-    // "background": "#FDF6E3",
-    // "editor.background": "#FDF6E3",
     "syntax": {
-      // "variable": { "font_style": "italic" },
       "keyword": {
         "font_style": "italic"
       },
@@ -192,6 +198,7 @@
   // },
   "tab_size": 2,
   "agent": {
+    "always_allow_tool_actions": true,
     "inline_assistant_model": {
       "provider": "ollama",
       "model": "deepseek-coder:6.7b"
@@ -200,7 +207,7 @@
     "default_model": {
       "provider": "ollama",
       // "model": "qwen2.5-coder:32b"
-      "model": "qwen2.5-coder:32b"
+      "model": "gpt-oss:20b"
     }
   },
   "project_panel": {
@@ -240,24 +247,18 @@
   // },
   "languages": {
     "TSX": {
+      "formatter": [],
       "code_actions_on_format": {
         "source.organizeImports": true
       },
-      "format_on_save": {
-        "code_actions": {
-          "source.organizeImports": true
-        }
-      }
+      "format_on_save": "on"
     },
     "TypeScript": {
+      "formatter": [],
       "code_actions_on_format": {
         "source.organizeImports": true
       },
-      "format_on_save": {
-        "code_actions": {
-          "source.organizeImports": true
-        }
-      }
+      "format_on_save": "on"
     },
     "JavaScript": {
       "code_actions_on_format": {
@@ -274,6 +275,20 @@
   "snippet_sort_order": "inline",
   "hover_popover_delay": 600,
   "lsp": {
+    "codeblock": {
+      "enable_lsp_tasks": false,
+      "initialization_options": {
+        "logLevel": "info"
+      }
+    },
+    "tailwindcss-language-server": {
+      "settings": {
+        "classFunctions": ["cva", "cx"],
+        "experimental": {
+          "classRegex": ["[cls|className]\\s\\:\\=\\s\"([^\"]*)"]
+        }
+      }
+    },
     "rust-analyzer": {
       "initialization_options": {
         // "inlayHints": {
@@ -326,12 +341,6 @@
         }
       }
     },
-    // "angular": {
-    //   // "initialization_options": {
-    //   //   "angular_language_service_version": "19.0.0",
-    //   //   "typescript_version": "5.6.2"
-    //   // }
-    // },
     "scls": {
       "enable_lsp_tasks": true,
       // simple completion language server.

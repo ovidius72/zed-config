@@ -81,7 +81,7 @@
     "context": "Editor && vim_mode == insert",
     "bindings": {
       "j j": "vim::NormalBefore",
-      "ctrl-f": "editor::AcceptPartialCopilotSuggestion",
+      "ctrl-f": "editor::AcceptPartialEditPrediction",
       "alt-[": "copilot::NextSuggestion",
       "alt-]": "copilot::PreviousSuggestion",
       "alt-cmd-j": "editor::AddSelectionBelow",
@@ -183,7 +183,7 @@
   {
     "context": "Editor && vim_mode == visual && !VimWaiting && !VimObject",
     "bindings": {
-      "shift-s": ["vim::PushAddSurrounds", {}]
+      "shift-s": "vim::PushAddSurrounds"
     }
   },
   {
@@ -194,7 +194,7 @@
       "space tab": "pane::AlternateFile",
       // buffers
       "space b k": "pane::CloseActiveItem",
-      "space b o": "pane::CloseInactiveItems",
+      "space b o": "pane::CloseOtherItems",
       "space b shift-o": "workspace::CloseInactiveTabsAndPanes",
       "] b": "pane::ActivateNextItem",
       "[ b": "pane::ActivatePreviousItem",
@@ -357,10 +357,9 @@
     }
   },
   {
-    "context": "GitPanel || AssistantPanel || AgentPanel",
+    "context": "GitPanel || AssistantPanel || AgentPanel || OutlinePanel",
     "bindings": {
       "ctrl-\\": "git_panel::ToggleFocus",
-      // "ctrl-alt-\\": "git_panel::Close",
       "ctrl-alt-\\": "workspace::ToggleRightDock",
       "ctrl-alt-]": "workspace::ToggleRightDock"
     }
