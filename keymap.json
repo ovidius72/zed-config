@@ -1,9 +1,23 @@
 [
-  // {
-  //   "context": "Workspace",
-  //   "bindings": {
-  //   }
-  // },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-w l": "workspace::ActivatePaneRight",
+      "ctrl-w k": "workspace::ActivatePaneUp",
+      "ctrl-w j": "workspace::ActivatePaneDown",
+      "ctrl-w h": "workspace::ActivatePaneLeft",
+      "ctrl-x i": ["workspace::SendKeystrokes", "cmd-shift-p :ls"],
+      "ctrl-x l": "tab_switcher::Toggle"
+    }
+  },
+  {
+    "context": "(VimControl && !menu)",
+    "bindings": {
+      "space i": "file_finder::Toggle",
+      // "space l": "tab_switcher::Toggle"
+      "space l": ["workspace::SendKeystrokes", "cmd-shift-p :ls enter"]
+    }
+  },
   {
     "context": "(vim_mode == normal || vim_mode == visual || vim_mode == waiting) && multibuffer",
     "bindings": {
@@ -13,6 +27,10 @@
       "[ f": "search::SelectPreviousMatch",
       "space shift-y": ["workspace::SendKeystrokes", "\" 0 p"],
       "enter": "vim::SearchSubmit",
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-h": "workspace::ActivatePaneLeft",
       "escape": "buffer_search::Dismiss"
     }
   },
@@ -120,17 +138,21 @@
     "bindings": {
       "h": "project_panel::CollapseSelectedEntry",
       "space ]": "project_panel::ToggleFocus",
+      "shift-h": "project_panel::ToggleHideGitIgnore",
       "ctrl-l": "project_panel::ToggleFocus",
       "space [": "workspace::ToggleLeftDock",
       "ctrl-alt-[": "workspace::ToggleLeftDock",
       "ctrl-[": "project_panel::ToggleFocus",
-      // "l": "project_panel::ExpandSelectedEntry",
       "ctrl-k": "editor::MoveUp",
       "ctrl-j": "editor::MoveDown",
-      "l": "project_panel::Open",
+      "l": "project_panel::OpenPermanent",
+      "p": "project_panel::Open",
       "escape": "project_panel::ToggleFocus",
       "enter": "project_panel::Open",
       "d": "project_panel::NewDirectory",
+      "v": "project_panel::OpenSplitVertical",
+      "s": "project_panel::OpenSplitHorizontal",
+      "t": "workspace::OpenInTerminal",
       "a": "project_panel::NewFile",
       "shift-r": "project_panel::Rename",
       "ctrl-\\": "git_panel::ToggleFocus",
@@ -224,7 +246,16 @@
   //   "context": "Editor && vim_mode == normal && !multibuffer"
   // },
   {
-    "context": "Editor && vim_mode == normal && !multibuffer",
+    "context": "ProjectSearchBar",
+    "bindings": {
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-h": "workspace::ActivatePaneLeft"
+    }
+  },
+  {
+    "context": "KeyContextView || (Editor && vim_mode == normal && !multibuffer)",
     "bindings": {
       "alt-right": "vim::ResizePaneRight",
       "alt-left": "vim::ResizePaneLeft",
@@ -236,6 +267,9 @@
       ".": "vim::Repeat",
       "space h t": "zed::OpenTasks",
       "space m": "vim::ToggleMarksView",
+      "space i": "file_finder::Toggle",
+      // "space l": "tab_switcher::Toggle",
+      "space l": ["workspace::SendKeystrokes", "cmd-shift-p :ls enter"],
       "space h p": "editor::ShowCharacterPalette",
       "space t l": "editor::ToggleRelativeLineNumbers",
       "g shift-e": "editor::OpenExcerptsSplit",
@@ -250,7 +284,7 @@
         "task::Spawn",
         { "task_name": "Atac", "reveal_targer": "center" }
       ],
-      "space g G": ["task::Spawn", { "task_name": "LazyGit" }],
+      "space g G": ["task::Spawn", { "task_name": "LazyGitCurrentFile" }],
       "space g g": [
         "task::Spawn",
         { "task_name": "LazyGit", "reveal_target": "center" }
@@ -269,7 +303,6 @@
       // ],
       "alt-j": "editor::MoveLineDown",
       "alt-k": "editor::MoveLineUp",
-      "space l": "tab_switcher::Toggle",
       "ctrl-p": "projects::OpenRecent",
       "space w n": "workspace::NewWindow",
       "space s a": [
@@ -307,7 +340,6 @@
       "[ g": "editor::GoToPreviousHunk",
       "space t t": "task::Spawn",
       "space t r": "task::Rerun",
-      "space i": "file_finder::Toggle",
       "ctrl-'": "workspace::ToggleBottomDock",
       "space [": "workspace::ToggleLeftDock",
       "ctrl-alt-[": "workspace::ToggleLeftDock",
@@ -337,6 +369,7 @@
       "space c o": "editor::ToggleCodeActions",
       "space c m": "editor::OpenContextMenu",
       "space c r": "editor::Rename",
+      "space r n": "editor::Rename",
       "space s o": "outline::Toggle",
       "K": "editor::Hover",
       // terminal

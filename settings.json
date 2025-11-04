@@ -7,6 +7,18 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "context_servers": {
+    "mcp-server-sonarqube": {
+      "source": "extension",
+      "enabled": true,
+      "settings": {
+        "sonarqube_token": "YOUR_SONARQUBE_USER_TOKEN",
+        "sonarqube_url": "YOUR_SONARQUBE_SERVER_URL",
+        "sonarqube_org": "SONARQUBE_ORGANIZATION_KEY",
+        "docker_path": "/usr/bin/docker"
+      }
+    }
+  },
   "toolbar": {
     "code_actions": false,
     "breadcrumbs": true,
@@ -119,15 +131,12 @@
   "features": {
     "edit_prediction_provider": "copilot"
   },
-  // "ui_font_family": "Maple Mono",
   "ui_font_family": "Maple Mono NF",
   "ui_font_size": 16,
-  // "buffer_font_features": {},
   "buffer_font_family": "Maple Mono NF",
-  "buffer_font_features": {
-    "calt": true
-    // "cv01": 7
-  },
+  // "buffer_font_features": {
+  //   "calt": true
+  // },
   "confirm_quit": true,
   "auto_update": true,
   "code_actions_on_format": {
@@ -138,7 +147,6 @@
     "font_family": "Maple Mono NF",
     "dock": "bottom",
     "working_directory": "current_project_directory",
-    // "default_height": 1000,
     "copy_on_select": true,
     "cursor_shape": "block",
     "line_height": "standard"
@@ -211,6 +219,7 @@
     }
   },
   "project_panel": {
+    "hide_gitignore": false,
     "auto_fold_dirs": false,
     "auto_reveal_entries": true,
     "show_diagnostics": "all",
@@ -247,6 +256,7 @@
   // },
   "languages": {
     "TSX": {
+      // "language_servers": ["typescript-language-server", "!vtsls", "..."],
       "formatter": [],
       "code_actions_on_format": {
         "source.organizeImports": true
@@ -276,9 +286,12 @@
   "hover_popover_delay": 600,
   "lsp": {
     "codeblock": {
-      "enable_lsp_tasks": false,
       "initialization_options": {
-        "logLevel": "info"
+        "logLevel": "info",
+        "dictionaries": ["en_us", "it"]
+      },
+      "settings": {
+        "dictionaries": ["en_us", "it"]
       }
     },
     "tailwindcss-language-server": {
@@ -384,6 +397,11 @@
           "includeinlayfunctionlikereturntypehints": true,
           "includeinlayenummembervaluehints": true
         }
+      }
+    },
+    "vtsls": {
+      "settings": {
+        "typescript": { "tsserver": { "maxTsServerMemory": 16184 } }
       }
     }
   },
