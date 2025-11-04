@@ -2,12 +2,14 @@
   {
     "context": "Workspace",
     "bindings": {
-      "ctrl-w l": "workspace::ActivatePaneRight",
-      "ctrl-w k": "workspace::ActivatePaneUp",
-      "ctrl-w j": "workspace::ActivatePaneDown",
-      "ctrl-w h": "workspace::ActivatePaneLeft",
-      "ctrl-x i": ["workspace::SendKeystrokes", "cmd-shift-p :ls"],
-      "ctrl-x l": "tab_switcher::Toggle"
+      // "ctrl-w l": "workspace::ActivatePaneRight",
+      // "ctrl-w k": "workspace::ActivatePaneUp",
+      // "ctrl-w j": "workspace::ActivatePaneDown",
+      // "ctrl-w h": "workspace::ActivatePaneLeft",
+
+      "ctrl-x l": ["workspace::SendKeystrokes", ": :ls enter"],
+      "ctrl-x i": "file_finder::Toggle",
+      "ctrl-x p": "projects::OpenRecent"
     }
   },
   {
@@ -15,7 +17,7 @@
     "bindings": {
       "space i": "file_finder::Toggle",
       // "space l": "tab_switcher::Toggle"
-      "space l": ["workspace::SendKeystrokes", "cmd-shift-p :ls enter"]
+      "space l": ["workspace::SendKeystrokes", ": :ls enter"]
     }
   },
   {
@@ -114,6 +116,7 @@
       "alt-left": "vim::ResizePaneLeft",
       "alt-down": "vim::ResizePaneDown",
       "alt-up": "vim::ResizePaneUp",
+      "ctrl-x :": "command_palette::Toggle",
       "ctrl-;": "terminal_panel::ToggleFocus",
       "ctrl-c": ["terminal::SendKeystroke", "ctrl-c"],
       "ctrl-'": "workspace::ToggleBottomDock",
@@ -269,7 +272,7 @@
       "space m": "vim::ToggleMarksView",
       "space i": "file_finder::Toggle",
       // "space l": "tab_switcher::Toggle",
-      "space l": ["workspace::SendKeystrokes", "cmd-shift-p :ls enter"],
+      "space l": ["workspace::SendKeystrokes", ": :ls enter"],
       "space h p": "editor::ShowCharacterPalette",
       "space t l": "editor::ToggleRelativeLineNumbers",
       "g shift-e": "editor::OpenExcerptsSplit",
@@ -295,12 +298,8 @@
       ],
       "space g T": [
         "workspace::SendKeystrokes",
-        "ctrl-; cmd-shift-p workspace zoom enter ctrl-c lazygit enter"
+        "ctrl-; ctrl-c ctrl-x p workspace zoom enter ctrl-c lazygit enter"
       ],
-      // "ctrl-,": [
-      //   "workspace::SendKeystrokes",
-      //   "cmd-shift-p toggle left dock enter"
-      // ],
       "alt-j": "editor::MoveLineDown",
       "alt-k": "editor::MoveLineUp",
       "ctrl-p": "projects::OpenRecent",
@@ -379,6 +378,7 @@
       "ctrl-j": "workspace::ActivatePaneDown",
       "ctrl-h": "workspace::ActivatePaneLeft",
       "space p": "command_palette::Toggle",
+      "ctrl-x :": "command_palette::Toggle",
       "g r": "editor::FindAllReferences",
       "g o": "editor::GoToImplementation",
       "g O": "editor::GoToImplementationSplit",

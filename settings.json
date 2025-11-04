@@ -19,6 +19,26 @@
       }
     }
   },
+  "auto_install_extensions": {
+    "enabled": true,
+    "env": true,
+    "graphql": true,
+    "log": true,
+    "nginx": true,
+    "rainbow-csv": true,
+    "markdown-oxide": false,
+    "emmet": true,
+    "docker-emme": true,
+    "docker-compose": true,
+    "dockerfile": true,
+    "html": true,
+    "toml": true,
+    "make": true,
+    "nightfox": true,
+    "catppuccin": true,
+    "catppuccin-icons": true,
+    "cargo-tom": true
+  },
   "toolbar": {
     "code_actions": false,
     "breadcrumbs": true,
@@ -115,11 +135,6 @@
   // "preview_tabs": { "enable_preview_from_code_navigation": true },
   "seed_search_query_from_cursor": "always",
   "show_signature_help_after_edits": false,
-  "auto_update_extensions": {
-    "markdown-oxide": false,
-    "emmet": true,
-    "enabled": true
-  },
   "use_auto_surround": true,
   "use_autoclose": true,
   "show_edit_predictions": false,
