@@ -101,6 +101,7 @@
     "context": "Editor && vim_mode == insert",
     "bindings": {
       "j j": "vim::NormalBefore",
+      "ctrl-e": "editor::ShowEditPrediction",
       "ctrl-f": "editor::AcceptPartialEditPrediction",
       "alt-[": "copilot::NextSuggestion",
       "alt-]": "copilot::PreviousSuggestion",
@@ -127,12 +128,14 @@
       "alt-k": "workspace::ActivatePaneUp",
       "alt-j": "workspace::ActivatePaneDown",
       "alt-h": "workspace::ActivatePaneLeft",
+      "cmd-alt-l": "pane::ActivatePreviousItem",
+      "cmd-alt-h": "pane::ActivateNextItem",
       "alt-s": "pane::SplitHorizontal",
       "alt-v": "pane::SplitVertical",
-      "cmd-alt-j": "pane::SplitDown",
-      "cmd-alt-k": "pane::SplitUp",
-      "cmd-alt-h": "pane::SplitLeft",
-      "cmd-alt-l": "pane::SplitRight"
+      "cmd-ctrl-j": "pane::SplitDown",
+      "cmd-ctrl-k": "pane::SplitUp",
+      "cmd-ctrl-h": "pane::SplitLeft",
+      "cmd-ctrl-l": "pane::SplitRight"
       // "ctrl-/": ["workspace::SendKeystrokes", "alt-q ctrl-;"]
     }
   },
@@ -322,6 +325,7 @@
       "space g p": "git::Push",
       "space g r": "git::Restore",
       "space g f": "git_panel::ToggleFocus",
+      "space g w": "git::Worktree",
       "ctrl-\\": "git_panel::ToggleFocus",
       // "ctrl-alt-\\": ["git_panel::ToggleFocus", ""],
       "space g c": "git::ExpandCommitEditor",
