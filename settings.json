@@ -48,15 +48,13 @@
   "gutter": {
     "folds": true
   },
-  "theme": "Catppuccin Macchiato",
+  "theme": "Catppuccin Mocha - No Italics",
   "search_wrap": true,
   "use_smartcase_search": false,
   "file_types": {
     "env": [".env", ".env*"]
   },
-  "dev": {
-    "lsp_document_colors": "inlay"
-  },
+  "lsp_document_colors": "inlay",
   // "lsp_document_colors": "inlay",
   "debugger": {
     "dock": "bottom",
@@ -67,7 +65,6 @@
 
   "bottom_dock_layout": "contained",
   "edit_predictions": {
-    "disabled_globs": [],
     "mode": "subtle",
     "copilot": {
       "proxy": null,
@@ -230,9 +227,9 @@
     },
     // "provider": {
     "default_model": {
-      "provider": "ollama",
+      "provider": "copilot_chat",
       // "model": "qwen2.5-coder:32b"
-      "model": "gpt-oss:20b"
+      "model": "gpt-5-mini"
     }
   },
   "project_panel": {
@@ -240,7 +237,7 @@
     "file_icons": true,
     "folder_icons": true
   },
-  "formatter": "prettier",
+  "formatter": "auto",
   // "formatter": {
   //   "external": {
   //     "arguments": ["--stdin-filepath", "{buffer_path}"],
@@ -258,6 +255,9 @@
     "hour_format": "hour24"
   },
   "languages": {
+    "Rust": {
+      "show_edit_predictions": false
+    },
     "TSX": {
       // "language_servers": ["typescript-language-server", "!vtsls", "..."],
       "code_actions_on_format": {
@@ -305,9 +305,9 @@
     },
     "rust-analyzer": {
       "initialization_options": {
-        // "inlayHints": {
-        //   "expressionAdjustmentHints": { "enable": "reborrow" }
-        // },
+        "check": {
+          "command": "clippy" // rust-analyzer.check.command (default: "check")
+        },
         "completion": {
           "snippets": {
             "custom": {
