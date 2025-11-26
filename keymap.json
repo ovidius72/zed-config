@@ -1,18 +1,11 @@
 [
   {
     "context": "vim_mode == normal",
-    "bindings": {
-      //  "g c %": ["workspace::SendKeystrokes", "v % g c"]
-    }
+    "bindings": {}
   },
   {
     "context": "Workspace",
     "bindings": {
-      // "ctrl-w l": "workspace::ActivatePaneRight",
-      // "ctrl-w k": "workspace::ActivatePaneUp",
-      // "ctrl-w j": "workspace::ActivatePaneDown",
-      // "ctrl-w h": "workspace::ActivatePaneLeft",
-
       "alt-x l": ["workspace::SendKeystrokes", ": :ls enter"],
       "alt-x i": "file_finder::Toggle",
       "alt-x p": "projects::OpenRecent"
@@ -22,8 +15,12 @@
     "context": "(VimControl && !menu)",
     "bindings": {
       "space i": "file_finder::Toggle",
-      // "space l": "tab_switcher::Toggle"
-      "space l": ["workspace::SendKeystrokes", ": :ls enter"]
+      "space l": ["workspace::SendKeystrokes", ": :ls enter"],
+      "space u": "editor::GoToPreviousDiagnostic",
+      "space d l": "editor::ToggleInlineDiagnostics",
+      "space d d": "diagnostics::Deploy",
+      "space d b": "debug_panel::ToggleFocus",
+      "space d w": "diagnostics::ToggleWarnings"
     }
   },
   {
@@ -45,9 +42,7 @@
   {
     // APPLY TO ALL CONTEXTS
     "bindings": {
-      // "ctrl-r": "editor::ShowWordCompletions",
       "alt-i": "editor::ShowSignatureHelp",
-      // "ctrl-c": "vim::SwitchToNormalMode",
       "cmd-]": "pane::ActivateNextItem",
       "ctrl-c": "menu::Cancel",
       "cmd-[": "pane::ActivatePreviousItem",
@@ -244,7 +239,14 @@
     "context": "VimControl && !menu",
     "bindings": {
       "*": ["vim::MoveToNext", { "case_sensitive": true }],
-      "#": ["vim::MoveToPrevious", { "case_sensitive": true }]
+      "#": ["vim::MoveToPrevious", { "case_sensitive": true }],
+      "alt-right": "vim::ResizePaneRight",
+      "alt-left": "vim::ResizePaneLeft",
+      "alt-down": "vim::ResizePaneDown",
+      "alt-up": "vim::ResizePaneUp",
+      "alt-=": "workspace::IncreaseActiveDockSize",
+      "alt--": "workspace::DecreaseActiveDockSize",
+      "alt-0": "workspace::ResetActiveDockSize"
     }
   },
   {
@@ -354,9 +356,6 @@
       "space [": "workspace::ToggleLeftDock",
       "ctrl-alt-[": "workspace::ToggleLeftDock",
       "space ]": "pane::RevealInProjectPanel",
-      "space u": "editor::GoToPreviousDiagnostic",
-      "space d l": "editor::ToggleInlineDiagnostics",
-      "space d d": "diagnostics::Deploy",
       "[ d": "editor::GoToPreviousDiagnostic",
       "] d": "editor::GoToDiagnostic",
       "space f f": "editor::Format",
@@ -393,11 +392,21 @@
       "g r": "editor::FindAllReferences",
       "g o": "editor::GoToImplementation",
       "g O": "editor::GoToImplementationSplit",
-      "g d": "editor::GoToDefinition",
-      "g D": "editor::GoToDeclaration",
+      // "g d": "editor::GoToDefinition",
+      // "g D": "editor::GoToDeclaration",
       "g V": "editor::GoToDefinitionSplit",
-      "g y": "editor::GoToTypeDefinition",
-      "g Y": "editor::GoToTypeDefinitionSplit"
+      // "g y": "editor::GoToTypeDefinition",
+      "g Y": "editor::GoToTypeDefinitionSplit",
+      "space j {": ["workspace::SendKeystrokes", "v a { : join enter"],
+      "space s {": [
+        "workspace::SendKeystrokes",
+        "v i { : s/,/,\n/g enter escape : format enter "
+      ],
+      "space j [": ["workspace::SendKeystrokes", "v a [ : join enter"],
+      "space s [": [
+        "workspace::SendKeystrokes",
+        "v i [ : s/,/,\n/g enter escape : format enter "
+      ]
     }
   },
   {
@@ -409,7 +418,7 @@
     }
   },
   {
-    "context": "GitPanel > Editor && VimControl && vim_mode == normal",
+    "context": "GitPanel > Editor && VimControl && vim_mode == normal ||vim_mode == insert",
     "use_key_equivalents": true,
     "bindings": {
       "tab": "git_panel::FocusChanges",

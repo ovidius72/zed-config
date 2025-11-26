@@ -48,7 +48,7 @@
   "gutter": {
     "folds": true
   },
-  "theme": "Catppuccin Mocha - No Italics",
+  "theme": "Catppuccin Mocha",
   "search_wrap": true,
   "use_smartcase_search": false,
   "file_types": {
@@ -233,7 +233,7 @@
     }
   },
   "project_panel": {
-    "hide_gitignore": true,
+    "hide_gitignore": false,
     "file_icons": true,
     "folder_icons": true
   },
@@ -286,6 +286,28 @@
   "snippet_sort_order": "inline",
   "hover_popover_delay": 600,
   "lsp": {
+    // "jdtls": {
+    //   "settings": {
+    //     "java_home": "/Users/antonio/.asdf/installs/java/openjdk-22",
+    //     "lombok_support": true,
+    //     "jdk_auto_download": false,
+
+    //     // Controls when to check for updates for JDTLS, Lombok, and Debugger
+    //     // - "always" (default): Always check for and download the latest version
+    //     // - "once": Check for updates only if no local installation exists
+    //     // - "never": Never check for updates, only use existing local installations (errors if missing)
+    //     //
+    //     // Note: Invalid values will default to "always"
+    //     // If custom paths (below) are provided, check_updates is IGNORED for that component
+    //     "check_updates": "always"
+
+    //     // Use custom installations instead of managed downloads
+    //     // When these are set, the extension will not download or manage these components
+    //     // "jdtls_launcher": "/path/to/your/jdt-language-server/bin/jdtls",
+    //     // "lombok_jar": "/path/to/your/lombok.jar",
+    //     // "java_debug_jar": "/path/to/your/com.microsoft.java.debug.plugin.jar"
+    //   }
+    // },
     "codeblock": {
       "initialization_options": {
         "logLevel": "info",
