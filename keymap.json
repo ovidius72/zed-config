@@ -26,6 +26,8 @@
   {
     "context": "(vim_mode == normal || vim_mode == visual || vim_mode == waiting) && multibuffer",
     "bindings": {
+      "space f s": "workspace::SaveAll",
+      "space f S": "workspace::Save",
       "[ e": "editor::MoveToEndOfPreviousExcerpt",
       "] e": "editor::MoveToStartOfNextExcerpt",
       "] f": "search::SelectNextMatch",
@@ -220,7 +222,10 @@
     "bindings": {
       "ctrl-n": ["vim::PushSneak", {}],
       "ctrl-s": ["vim::PushSneakBackward", {}],
-      "space tab": "pane::AlternateFile",
+      "space tab": [
+        "workspace::SendKeystrokes",
+        ": pane AlternateFile enter ctrl-wait escape"
+      ],
       // buffers
       "space b k": "pane::CloseActiveItem",
       "space b o": "pane::CloseOtherItems",
@@ -306,6 +311,10 @@
         "workspace::SendKeystrokes",
         "v i w y o console.log(\"****: \",  ) ctrl-c F\" h h h p f, l l p"
       ],
+      "g ? f": [
+        "workspace::SendKeystrokes",
+        ": deploy search enter console.log\\(['\"][*]{4}: enter"
+      ],
       "space g T": [
         "workspace::SendKeystrokes",
         "ctrl-; ctrl-c alt-x p workspace zoom enter ctrl-c lazygit enter"
@@ -363,7 +372,10 @@
       "space f s": "workspace::SaveAll",
       "space f S": "workspace::Save",
       "space f n": "workspace::SaveWithoutFormat",
-      "space f w": ["workspace::SendKeystrokes", "v i w g / enter"],
+      "space f w": [
+        "workspace::SendKeystrokes",
+        "v i w g / enter esc ctrl-wait ctrl-c escape"
+      ],
       "space a m": "markdown::OpenPreview",
       // "space a i": "assistant::ToggleFocus",
       "ctrl-]": "agent::ToggleFocus",
@@ -455,6 +467,8 @@
       "ctrl-k": "editor::ContextMenuPrevious",
       "ctrl-j": "editor::ContextMenuNext",
       "ctrl-p": "editor::ContextMenuPrevious",
+      "ctrl-c": ["workspace::SendKeystrokes", "escape"],
+      "q": ["workspace::SendKeystrokes", "escape"],
       "ctrl-n": "editor::ContextMenuNext",
       "pageup": "editor::ContextMenuFirst",
       "pagedown": "editor::ContextMenuLast"

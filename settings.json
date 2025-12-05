@@ -9,13 +9,11 @@
 {
   "context_servers": {
     "mcp-server-sonarqube": {
-      "source": "extension",
       "enabled": true,
       "settings": {
-        "sonarqube_token": "YOUR_SONARQUBE_USER_TOKEN",
-        "sonarqube_url": "YOUR_SONARQUBE_SERVER_URL",
-        "sonarqube_org": "SONARQUBE_ORGANIZATION_KEY",
-        "docker_path": "/usr/bin/docker"
+        "sonarqube_token": "cc0927c9a529938336ed6ca5cfde5335744c56b9",
+        "sonarqube_org": "hypedevops",
+        "docker_path": "/usr/local/bin/docker"
       }
     }
   },
@@ -220,6 +218,38 @@
   // },
   "tab_size": 2,
   "agent": {
+    "profiles": {
+      "write": {
+        "name": "Write",
+        "tools": {
+          "copy_path": true,
+          "create_directory": true,
+          "delete_path": true,
+          "diagnostics": true,
+          "edit_file": true,
+          "fetch": true,
+          "list_directory": true,
+          "project_notifications": false,
+          "move_path": true,
+          "now": true,
+          "find_path": true,
+          "read_file": true,
+          "open": true,
+          "grep": true,
+          "terminal": true,
+          "thinking": true,
+          "web_search": true
+        },
+        "enable_all_context_servers": true,
+        "context_servers": {
+          "mcp-server-sonarqube": {
+            "tools": {
+              "analyze_code_snippet": true
+            }
+          }
+        }
+      }
+    },
     "always_allow_tool_actions": true,
     "inline_assistant_model": {
       "provider": "ollama",
@@ -227,9 +257,9 @@
     },
     // "provider": {
     "default_model": {
-      "provider": "copilot_chat",
+      "provider": "ollama",
       // "model": "qwen2.5-coder:32b"
-      "model": "gpt-5-mini"
+      "model": "gpt-oss:20b"
     }
   },
   "project_panel": {
